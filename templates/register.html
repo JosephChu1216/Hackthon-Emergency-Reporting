@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>FindGoods</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<!--[if ie]><meta content='IE=8' http-equiv='X-UA-Compatible'/><![endif]-->
+		<!-- bootstrap -->
+		<link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+		<link href="{{url_for('static', filename='css/bootstrap-responsive.min.css')}}" rel="stylesheet">
+		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+		<link href="{{url_for('static', filename='css/bootstrappage.css')}}" rel="stylesheet"/>
+
+		<!-- global styles -->
+		<link href="{{url_for('static', filename='css/flexslider.css')}}" rel="stylesheet"/>
+		<link href="{{url_for('static', filename='css/main.css')}}" rel="stylesheet"/>
+		<link rel="stylesheet" href="{{ url_for('static', filename='fontawesome/css/all.min.css') }}"> <!-- https://fontawesome.com/ -->
+		<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet"> <!-- https://fonts.google.com/ -->
+		<!-- scripts -->
+		<script src="{{url_for('static', filename='js/jquery-1.7.2.min.js')}}"></script>
+		<script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+		<script src="{{url_for('static', filename='js/superfish.js')}}"></script>
+		<script src="{{url_for('static', filename='js/jquery.scrolltotop.js')}}"></script>
+		<!--[if lt IE 9]>
+			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js')}}"></script>
+			<script src="{{url_for('static', filename='js/respond.min.js')}}"></script>
+		<![endif]-->
+	</head>
+    <body>		
+		<div id="top-bar" class="container">
+			<div class="row">
+				<div class="span4"></div>
+				<div class="span8">
+					<div class="account pull-right">
+						<ul class="user-menu">
+							{% if current_user.is_authenticated %}
+								<li><a><font color="#eb4800">Hi {{ username }}!</font></a></li>
+							{% endif %}
+							<li><a href="{{ url_for('.myaccount') }}">My Account</a></li>
+<!--							<li><a href="./cart.html">Your Cart</a></li>-->
+<!--							<li><a href="./checkout.html">Checkout</a></li>-->
+							{% if current_user.is_authenticated %}
+								<li><a href="{{ url_for('.logout') }}">Logout</a></li>
+							{% else %}
+								<li><a href="{{ url_for('.register') }}">Login</a></li>
+							{% endif %}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="wrapper" class="container">
+			<section class="navbar main-menu">
+				<div class="navbar-inner main-menu">
+					<a href="{{ url_for('.index') }}" class="logo pull-left"><font face="fantasy" size="6"><strong>FindGoods</strong></font></a>
+					<nav id="menu" class="pull-right">
+						<ul>
+							<li><a>Category</a>
+								<ul>
+									<li><a href="/products/frame">Frame</a></li>
+									<li><a href="/products/lamps">Lamps</a></li>
+									<li><a href="/products/vasesbowl">Vasebowl</a></li>
+									<li><a href="/products/desk">Desk</a></li>
+									<li><a href="/products/mugs">Mugs</a></li>
+									<li><a href="/products/footstool">Footstool</a></li>
+									<li><a href="/products/Cushion">Cushion</a></li>
+								</ul>
+							</li>
+							<li><a href="{{ url_for('.search') }}">Photo to Search</a></li>
+							<li><a href="{{ url_for('.trend') }}">Popular trending</a></li>
+							<li><a href="{{ url_for('.about') }}">About us</a></li>
+						</ul>
+					</nav>
+				</div>
+			</section>			
+			<section class="header_text sub">
+			<img class="pageBanner" src="{{ url_for('static', filename='img/house5.jpg') }}" alt="New products" >
+				<h1><span>會員登入系統</span></h1>
+			</section>			
+			<section class="main-content">				
+				<div class="row">
+					<div class="span5">					
+						<h4 class="title"><span class="text"><strong>Login</strong> Form</span></h4>
+						<form action="./register.html" method="post">
+							{{ loginform.hidden_tag() }}
+							<input type="hidden" name="next" value="/">
+							<fieldset>
+								<div class="control-group">
+									<label class="control-label">Username:</label>
+									<div class="controls">
+<!--										<input type="text" placeholder="Enter your username" name="username" class="input-xlarge">-->
+										{{ loginform.username(class="input-xlarge",placeholder='Enter Your Username') }}
+										{% if loginform.username.errors %}
+											{% for error in loginform.username.errors %}
+												{{ error }}
+											{% endfor %}
+										{% endif %}
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">Password:</label>
+									<div class="controls">
+<!--										<input type="password" placeholder="Enter your password" name="password" class="input-xlarge">-->
+										{{ loginform.password(class="input-xlarge",placeholder='Enter Your Password')}}
+									</div>
+								</div>
+								<div class="control-group">
+									<div class="controls">
+										{{ loginform.remember_me(class="input-xlarge") }}
+										<label class="control-label">Remember me</label>
+									</div>
+								</div>
+								{% if loginform.validate_on_submit() %}
+									{% with messages = get_flashed_messages() %}
+										{% if messages %}
+											{% for message in messages %}
+												<a>{{ message }}</a>
+											{% endfor %}
+										{% endif %}
+									{% endwith %}
+								{% endif %}
+								<div class="control-group">
+									<input tabindex="3" class="btn btn-inverse large" type="submit" value="Sign into your account">
+<!--									<hr>-->
+<!--									<p class="reset">Recover your <a tabindex="4" href="#" title="Recover your username or password">username or password</a></p>-->
+								</div>
+							</fieldset>
+						</form>				
+					</div>
+					<div class="span7">					
+						<h4 class="title"><span class="text"><strong>Register</strong> Form</span></h4>
+						<form action="./register.html" method="post" class="form-stacked">
+							{{ reform.hidden_tag() }}
+							<fieldset>
+								<div class="control-group">
+									<label class="control-label">Username:</label>
+									<div class="controls">
+<!--										<input type="text" placeholder="Enter your username" class="input-xlarge">-->
+										{{ reform.username_r(class="input-xlarge",placeholder='Enter Your Username') }}
+										{% if reform.validate_on_submit() %}
+											{% with messages = get_flashed_messages() %}
+												{% if messages %}
+													{% for message in messages %}
+														<a>{{ message }}</a>
+													{% endfor %}
+												{% endif %}
+											{% endwith %}
+										{% endif %}
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">Password:</label>
+									<div class="controls">
+<!--										<input type="password" placeholder="Enter your password" class="input-xlarge">-->
+										{{ reform.password_r(class="input-xlarge",placeholder='Enter Your Password') }}
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">Email address:</label>
+									<div class="controls">
+<!--										<input type="password" placeholder="Enter your email" class="input-xlarge">-->
+										{{ reform.email(class="input-xlarge",placeholder='Enter Your Email') }}
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">Sex:</label>
+									<div class="controls">
+										{{ reform.sex(class="input-xlarge") }}
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">Age:</label>
+									<div class="controls">
+										{{ reform.age(class="input-xlarge",placeholder='Enter Your Age') }}
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">Area:</label>
+									<div class="controls">
+										{{ reform.area(class="input-xlarge") }}
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">Career:</label>
+									<div class="controls">
+										{{ reform.career(class="input-xlarge",placeholder='Enter Your Career') }}
+									</div>
+								</div>
+								<div class="control-group">
+									<p>Join us now!!</p>
+								</div>
+								<hr>
+								<div class="actions">
+<!--									<input tabindex="9" class="btn btn-inverse large" type="submit" value="Create your account">-->
+									{{ reform.submit_r(tabindex="9", class="btn btn-inverse large", value="Create your account") }}
+								</div>
+							</fieldset>
+						</form>					
+					</div>				
+				</div>
+			</section>			
+			<section id="footer-bar">
+				<div class="row">
+					<div class="span2"></div>
+					<div class="span5">
+						<h4>Navigation</h4>
+						<ul class="nav">
+							<li><a href="{{ url_for('.index') }}">Homepage</a></li>
+							<li><a href="{{ url_for('.myaccount') }}">My Account</a></li>
+							<li><a href="{{ url_for('.about') }}">About Us</a></li>
+						</ul>
+					</div>
+					<div class="span5">
+						<p class="logo"><img src="{{url_for('static', filename='img/logo.png')}}" class="site_logo" alt=""></p>
+						<p>Hi! Please join us and pick your favorite items. Have fun 👊</p>
+						<br/>
+					</div>
+				</div>
+			</section>
+			<section id="copyright">
+				<span>Copyright 2013 bootstrappage template  All right reserved.</span>
+			</section>
+		</div>
+		<script src="{{url_for('static', filename='js/common.js') }}"></script>
+		<script>
+			$(document).ready(function() {
+				$('#checkout').click(function (e) {
+					document.location.href = "checkout.html";
+				})
+			});
+		</script>		
+    </body>
+</html>

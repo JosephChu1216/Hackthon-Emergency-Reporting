@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>FindGoods</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<!--[if ie]><meta content='IE=8' http-equiv='X-UA-Compatible'/><![endif]-->
+		<!-- bootstrap -->
+		<link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+		<link href="{{url_for('static', filename='css/bootstrap-responsive.min.css')}}" rel="stylesheet">
+		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+		<link href="{{url_for('static', filename='css/bootstrappage.css')}}" rel="stylesheet"/>
+
+		<!-- global styles -->
+		<link href="{{url_for('static', filename='css/flexslider.css')}}" rel="stylesheet"/>
+		<link href="{{url_for('static', filename='css/main.css')}}" rel="stylesheet"/>
+		<link rel="stylesheet" href="{{ url_for('static', filename='fontawesome/css/all.min.css') }}"> <!-- https://fontawesome.com/ -->
+		<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet"> <!-- https://fonts.google.com/ -->
+		<!-- scripts -->
+		<script src="{{url_for('static', filename='js/jquery-1.7.2.min.js')}}"></script>
+		<script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+		<script src="{{url_for('static', filename='js/superfish.js')}}"></script>
+		<script src="{{url_for('static', filename='js/jquery.scrolltotop.js')}}"></script>
+		<!--[if lt IE 9]>
+			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js')}}"></script>
+			<script src="{{url_for('static', filename='js/respond.min.js')}}"></script>
+		<![endif]-->
+	</head>
+    <body>
+		<div id="top-bar" class="container">
+			<div class="row">
+				<div class="span4"></div>
+				<div class="span8">
+					<div class="account pull-right">
+						<ul class="user-menu">
+							{% if current_user.is_authenticated %}
+								<li><a><font color="#eb4800">Hi {{ username }}!</font></a></li>
+							{% endif %}
+							<li><a href="{{ url_for('.myaccount') }}">My Account</a></li>
+							{% if current_user.is_authenticated %}
+								<li><a href="{{ url_for('.logout') }}">Logout</a></li>
+							{% else %}
+								<li><a href="{{ url_for('.register') }}">Login</a></li>
+							{% endif %}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="wrapper" class="container">
+			<section class="navbar main-menu">
+				<div class="navbar-inner main-menu">
+					<a href="{{ url_for('.index') }}" class="logo pull-left"><font face="fantasy" size="6"><strong>FindGoods</strong></font></a>
+					<nav id="menu" class="pull-right">
+						<ul>
+							<li><a>Category</a>
+								<ul>
+									<li><a href="/products/frame">Frame</a></li>
+									<li><a href="/products/lamps">Lamps</a></li>
+									<li><a href="/products/vasesbowl">Vasebowl</a></li>
+									<li><a href="/products/desk">Desk</a></li>
+									<li><a href="/products/mugs">Mugs</a></li>
+									<li><a href="/products/footstool">Footstool</a></li>
+									<li><a href="/products/Cushion">Cushion</a></li>
+								</ul>
+							</li>
+							<li><a href="{{ url_for('.search') }}">Photo to Search</a></li>
+							<li><a href="{{ url_for('.trend') }}">Popular trending</a></li>
+							<li><a href="{{ url_for('.about') }}">About us</a></li>
+						</ul>
+					</nav>
+				</div>
+			</section>　
+			<section class="header_text sub">
+				<img class="pageBanner" src="{{ url_for('static', filename='img/house3.jpg') }}" alt="New products" >
+				<h1><span>趨勢分析</span></h1>
+				<div class='tableauPlaceholder' id='viz1641365247887' style='position: relative'><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='2_16413650238960&#47;1_1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='zh-TW' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1641365247887');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='100%';vizElement.style.maxWidth='2048px';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';vizElement.style.maxHeight='987px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='100%';vizElement.style.maxWidth='2048px';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';vizElement.style.maxHeight='987px';} else { vizElement.style.width='100%';vizElement.style.height='1677px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+			</section>
+			<section id="footer-bar">
+				<div class="row">
+					<div class="span2"></div>
+					<div class="span5">
+						<h4>Navigation</h4>
+						<ul class="nav">
+							<li><a href="{{ url_for('.index') }}">Homepage</a></li>
+							<li><a href="{{ url_for('.myaccount') }}">My Account</a></li>
+							<li><a href="{{ url_for('.about') }}">About Us</a></li>
+						</ul>
+					</div>
+					<div class="span5">
+						<p class="logo"><img src="{{url_for('static', filename='img/logo.png')}}" class="site_logo" alt=""></p>
+						<p>Hi! Please join us and pick your favorite items. Have fun 👊</p>
+						<br/>
+					</div>
+				</div>
+			</section>
+			<section id="copyright">
+				<span>Copyright 2013 bootstrappage template  All right reserved.</span>
+			</section>
+		</div>
+		<script src="{{url_for('static', filename='js/common.js')}}"></script>
+    </body>
+</html>
