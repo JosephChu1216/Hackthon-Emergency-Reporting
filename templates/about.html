@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>FindGoods</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<!--[if ie]><meta content='IE=8' http-equiv='X-UA-Compatible'/><![endif]-->
+		<!-- bootstrap -->
+		<link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+		<link href="{{ url_for('static', filename='css/bootstrap-responsive.min.css') }}" rel="stylesheet">
+		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+		<link href="{{ url_for('static', filename='css/bootstrappage.css') }}" rel="stylesheet"/>
+
+		<!-- global styles -->
+		<link href="{{ url_for('static', filename='css/flexslider.css') }}" rel="stylesheet"/>
+		<link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet"/>
+		<link rel="stylesheet" href="{{ url_for('static', filename='fontawesome/css/all.min.css') }}"> <!-- https://fontawesome.com/ -->
+		<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet"> <!-- https://fonts.google.com/ -->
+		<!-- scripts -->
+		<script src="{{ url_for('static', filename='js/jquery-1.7.2.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/superfish.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/jquery.scrolltotop.js') }}"></script>
+		<!--[if lt IE 9]>
+			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+			<script src="{{ url_for('static', filename='js/respond.min.js') }}"></script>
+		<![endif]-->
+	</head>
+    <body>
+		<div id="top-bar" class="container">
+			<div class="row">
+				<div class="span4"></div>
+				<div class="span8">
+					<div class="account pull-right">
+						<ul class="user-menu">
+							{% if current_user.is_authenticated %}
+								<li><a><font color="#eb4800">Hi {{ username }}!</font></a></li>
+							{% endif %}
+							<li><a href="{{ url_for('.myaccount') }}">My Account</a></li>
+							{% if current_user.is_authenticated %}
+								<li><a href="{{ url_for('.logout') }}">Logout</a></li>
+							{% else %}
+								<li><a href="{{ url_for('.register') }}">Login</a></li>
+							{% endif %}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="wrapper" class="container">
+			<section class="navbar main-menu">
+				<div class="navbar-inner main-menu">
+					<a href="{{ url_for('.index') }}" class="logo pull-left"><font face="fantasy" size="6"><strong>FindGoods</strong></font></a>
+					<nav id="menu" class="pull-right">
+						<ul>
+							<li><a>Category</a>
+								<ul>
+									<li><a href="/products/frame">Frame</a></li>
+									<li><a href="/products/lamps">Lamps</a></li>
+									<li><a href="/products/vasesbowl">Vasebowl</a></li>
+									<li><a href="/products/desk">Desk</a></li>
+									<li><a href="/products/mugs">Mugs</a></li>
+									<li><a href="/products/footstool">Footstool</a></li>
+									<li><a href="/products/Cushion">Cushion</a></li>
+								</ul>
+							</li>
+							<li><a href="{{ url_for('.search') }}">Photo to Search</a></li>
+							<li><a href="{{ url_for('.trend') }}">Popular trending</a></li>
+							<li><a href="{{ url_for('.about') }}">About us</a></li>
+						</ul>
+					</nav>
+				</div>
+			</section>
+			<section class="header_text sub">
+				<img class="pageBanner" src="{{ url_for('static', filename='img/house4.jpg') }}" alt="New products" >
+				<h1><span>開發成員</span></h1>
+				<h2><span>如果對我們有興趣的話，歡迎寄信給我們😉</span></h2>
+			</section>
+			<section class="main-content">
+				<div class="row">
+					<div class="span12">
+						<ul class="thumbnails listing-products">
+							<li class="span3">
+								<div class="member-box">
+									<img alt="" src="{{ url_for('static', filename='img/members/Joseph.jpg') }}"><br/>
+									<a class="title">朱宗祐</a><br/>
+									<a class="content">組長</a><br/>
+									<span class="social_icons">
+										<a class="facebook" href="https://www.facebook.com/oldpig81701"><i class="fab fa-facebook fa-2x"></i></a>&emsp;
+										<a class="instagram" href="https://www.instagram.com/tsung_yo_chu/"><i class="fab fa-instagram fa-2x"></i></a>&emsp;
+										<a class="linkedin" href="https://www.linkedin.com/in/joseph-chu-275660180"><i class="fab fa-linkedin fa-2x"></i></a>&emsp;
+										<a class="github" href="https://github.com/JosephChu1216"><i class="fab fa-github fa-2x"></i></a><br>
+										<a class="Email"><font color="orange"><i class="far fa-envelope fa-2x"></i></font><font size="3"> oldpig81701@gmail.com</font></a>
+									</span>
+								</div>
+							</li>
+							<li class="span3">
+								<div class="member-box">
+									<img alt="" src="{{ url_for('static', filename='img/members/heng.png') }}"><br/>
+									<a class="title">葉亨凌</a><br/>
+									<a class="content">系統推薦</a><br/>
+									<span class="social_icons">
+										<a class="facebook" href="https://www.facebook.com/henglynn.yeh"><i class="fab fa-facebook fa-2x"></i></a>&emsp;
+<!--										<a class="instagram" href="https://www.instagram.com/tsung_yo_chu/"><i class="fab fa-instagram fa-2x"></i></a>&emsp;-->
+										<a class="linkedin" href="www.linkedin.com/in/marvisyeh"><i class="fab fa-linkedin fa-2x"></i></a><br>
+										<a class="Email"><font color="orange"><i class="far fa-envelope fa-2x"></i></font><font size="3"> marvisyeh@gmail.com</font></a>
+									</span>
+								</div>
+							</li>
+							<li class="span3">
+								<div class="member-box">
+									<img alt="" src="{{ url_for('static', filename='img/members/Wang.jpg') }}"><br/>
+									<a class="title">王昱茵</a><br/>
+									<a class="content">系統推薦</a><br/>
+									<span class="social_icons">
+										<a class="facebook" href="https://www.facebook.com/profile.php?id=100001266365275"><i class="fab fa-facebook fa-2x"></i></a><br>&emsp;
+<!--										<a class="instagram" href="https://www.instagram.com/tsung_yo_chu/"><i class="fab fa-instagram fa-2x"></i></a>&emsp;-->
+<!--										<a class="linkedin" href="https://www.linkedin.com/in/joseph-chu-275660180"><i class="fab fa-linkedin fa-2x"></i></a><br>-->
+										<a class="Email"><font color="orange"><i class="far fa-envelope fa-2x"></i></font><font size="3"> yuyin.wang1998@gmail.com</font></a>
+									</span>
+								</div>
+							</li>
+							<li class="span3">
+								<div class="member-box">
+									<img alt="" src="{{ url_for('static', filename='img/members/Wu.jpg') }}"><br/>
+									<a class="title">吳筱瑭</a><br/>
+									<a class="content">以圖搜圖</a><br/>
+									<span class="social_icons">
+										<a class="facebook" href="https://www.facebook.com/profile.php?id=100000696585858"><i class="fab fa-facebook fa-2x"></i></a><br>&emsp;
+<!--										<a class="instagram" href="https://www.instagram.com/tsung_yo_chu/"><i class="fab fa-instagram fa-2x"></i></a>&emsp;-->
+<!--										<a class="linkedin" href="https://www.linkedin.com/in/joseph-chu-275660180"><i class="fab fa-linkedin fa-2x"></i></a><br>-->
+										<a class="Email"><font color="orange"><i class="far fa-envelope fa-2x"></i></font><font size="3"> alicewu3577@gmail.com</font></a>
+									</span>
+								</div>
+							</li>
+							<li class="span3">
+								<div class="member-box">
+									<img alt="" src="{{ url_for('static', filename='img/members/Lin.jpg') }}"><br/>
+									<a class="title">林敬競</a><br/>
+									<a class="content">以圖搜圖</a><br/>
+									<span class="social_icons">
+										<a class="facebook" href="https://www.facebook.com/jingjing.lin.94"><i class="fab fa-facebook fa-2x"></i></a><br>&emsp;
+<!--										<a class="instagram" href="https://www.instagram.com/tsung_yo_chu/"><i class="fab fa-instagram fa-2x"></i></a>&emsp;-->
+<!--										<a class="linkedin" href="https://www.linkedin.com/in/joseph-chu-275660180"><i class="fab fa-linkedin fa-2x"></i></a><br>-->
+										<a class="Email"><font color="orange"><i class="far fa-envelope fa-2x"></i></font><font size="3"> jackylin861123@gmail.com</font></a>
+									</span>
+								</div>
+							</li>
+							<li class="span3">
+								<div class="member-box">
+									<img alt="" src="{{ url_for('static', filename='img/members/Lee.jpg') }}"><br/>
+									<a class="title">李紀德</a><br/>
+									<a class="content">趨勢分析</a><br/>
+									<span class="social_icons">
+										<a class="facebook" href="https://www.facebook.com/profile.php?id=100001856468000"><i class="fab fa-facebook fa-2x"></i></a><br>&emsp;
+<!--										<a class="instagram" href="https://www.instagram.com/tsung_yo_chu/"><i class="fab fa-instagram fa-2x"></i></a>&emsp;-->
+<!--										<a class="linkedin" href="https://www.linkedin.com/in/joseph-chu-275660180"><i class="fab fa-linkedin fa-2x"></i></a><br>-->
+										<a class="Email"><font color="orange"><i class="far fa-envelope fa-2x"></i></font><font size="3"> lee860910b@gmail.com</font></a>
+									</span>
+								</div>
+							</li>
+							<li class="span3">
+								<div class="member-box">
+									<img alt="" src="{{ url_for('static', filename='img/members/Chian.jpg') }}"><br/>
+									<a class="title">錢奕翔</a><br/>
+									<a class="content">趨勢分析</a><br/>
+									<span class="social_icons">
+										<a class="facebook" href="https://www.facebook.com/profile.php?id=100003755370759"><i class="fab fa-facebook fa-2x"></i></a><br>&emsp;
+<!--										<a class="instagram" href="https://www.instagram.com/tsung_yo_chu/"><i class="fab fa-instagram fa-2x"></i></a>&emsp;-->
+<!--										<a class="linkedin" href="https://www.linkedin.com/in/joseph-chu-275660180"><i class="fab fa-linkedin fa-2x"></i></a><br>-->
+										<a class="Email"><font color="orange"><i class="far fa-envelope fa-2x"></i></font><font size="3"> st10083010@gmail.com</font></a>
+									</span>
+								</div>
+							</li>
+						</ul>
+						<hr>
+					</div>
+				</div>
+			</section>
+			<section id="footer-bar">
+				<div class="row">
+					<div class="span2"></div>
+					<div class="span5">
+						<h4>Navigation</h4>
+						<ul class="nav">
+							<li><a href="{{ url_for('.index') }}">Homepage</a></li>
+							<li><a href="{{ url_for('.myaccount') }}">My Account</a></li>
+							<li><a href="{{ url_for('.about') }}">About Us</a></li>
+						</ul>
+					</div>
+					<div class="span5">
+						<p class="logo"><img src="{{url_for('static', filename='img/logo.png')}}" class="site_logo" alt=""></p>
+						<p>Hi! Please join us and pick your favorite items. Have fun 👊</p>
+						<br/>
+					</div>
+				</div>
+			</section>
+			<section id="copyright">
+				<span>Copyright 2013 bootstrappage template  All right reserved.</span>
+			</section>
+		</div>
+		<script src="{{ url_for('static', filename='js/common.js') }}"></script>
+    </body>
+</html>
